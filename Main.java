@@ -12,43 +12,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<Matrix> AList = new ArrayList<>();
-        ArrayList<Matrix> BList = new ArrayList<>();
+        ArrayList<int[][]> AList = new ArrayList<>();
+        ArrayList<int[][]> BList = new ArrayList<>();
 
         for (int i = 0; i < 10000; i++) {
             int[][] arr1 = {{R(),R()},{R(),R()}};
-            Matrix m1 = new Matrix(arr1, i);
-            AList.add(m1);
+            AList.add(arr1);
             int[][] arr2 = {{R(),R()},{R(),R()}};
-            Matrix m2 = new Matrix(arr2, i);
-            BList.add(m2);
+            BList.add(arr2);
         }
 
-        for(int i = 0; i < 100; i++) {
-            AList.get(i).start();
-        }
+        eigenvalue e = new eigenvalue(AList);
+        inversion i = new inversion(AList);
+        multiplication m = new multiplication(AList, BList);
 
-        for(int i = 0; i < 100; i++) {
-            AList.get(i).print();
-        }
-
-
-        /*
-        int menu = -1;
-        while(menu != 4) {
-            System.out.println("""
-                    1. input matrix one
-                    2. input matrix two
-                    3. multiply matrices
-                    4. end program""");
-            menu = menuSelection.nextInt();
-
-            switch (menu) {
-                case 1:
-                    userInput = sc.Next;
-                    break;
-            }
-        }
-        */
+        e.start();
+        i.start();
+        m.start();
     }
 }
