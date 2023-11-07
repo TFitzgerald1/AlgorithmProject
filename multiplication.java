@@ -1,10 +1,19 @@
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 public class multiplication extends Thread{
     int[][] finalMatrix;
-
-    multiplication(ArrayList<int[][]> AList,ArrayList<int[][]> BList) {
-        for (int i = 0; i < AList.size(); i++) {
+    ArrayList<int[][]> AList;
+    ArrayList<int[][]> BList;
+    CountDownLatch latch;
+    
+    multiplication(CountDownLatch inLatch, ArrayList<int[][]> inList1,ArrayList<int[][]> inList2) {
+        AList = inList1;
+        BList = inList2;
+        latch = inLatch;
+    }
+    public void run() {
+    	for (int i = 0; i < AList.size(); i++) {
             int[][] matrix1 = AList.get(i);
             int[][] matrix2 = BList.get(i);
 
@@ -18,5 +27,6 @@ public class multiplication extends Thread{
                 }
             }
         }
+    	latch.countDown();
     }
 }
